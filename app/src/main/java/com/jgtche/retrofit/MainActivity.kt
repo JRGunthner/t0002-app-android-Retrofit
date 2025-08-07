@@ -5,6 +5,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,5 +37,12 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        lifecycleScope.launch {
+            val result = postService.listCoroutine()
+            if (result.isSuccessful) {
+                val abc =  result.body()
+            }
+        }
     }
 }
